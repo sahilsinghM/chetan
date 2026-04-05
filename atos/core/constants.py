@@ -1,0 +1,47 @@
+"""Enumerations used across all ATOS layers."""
+
+from enum import StrEnum
+
+
+class InstrumentType(StrEnum):
+    EQ_SWING = "EQ_SWING"
+    EQ_INTRADAY = "EQ_INTRADAY"
+    FUT = "FUT"
+    OPT = "OPT"
+
+
+class Direction(StrEnum):
+    LONG = "LONG"
+    SHORT = "SHORT"
+
+
+class TradeStatus(StrEnum):
+    PLANNED = "PLANNED"
+    OPEN = "OPEN"
+    PARTIAL = "PARTIAL"
+    CLOSED = "CLOSED"
+    CANCELLED = "CANCELLED"
+
+
+class ExitReason(StrEnum):
+    SL_HIT = "SL_HIT"
+    T1 = "T1"
+    T2 = "T2"
+    MOMENTUM = "MOMENTUM"
+    EOD = "EOD"
+    MANUAL = "MANUAL"
+
+
+class EventType(StrEnum):
+    TRADE_CREATED = "TRADE_CREATED"
+    TRADE_OPENED = "TRADE_OPENED"
+    TRADE_PARTIAL_EXIT = "TRADE_PARTIAL_EXIT"
+    TRADE_SL_UPDATED = "TRADE_SL_UPDATED"
+    TRADE_CLOSED = "TRADE_CLOSED"
+    BHAV_COPY_INGESTED = "BHAV_COPY_INGESTED"
+    SCREENER_RUN = "SCREENER_RUN"
+    KILLSWITCH_ACTIVATED = "KILLSWITCH_ACTIVATED"
+    KILLSWITCH_CLEARED = "KILLSWITCH_CLEARED"
+    ORDER_PLACED = "ORDER_PLACED"
+    ORDER_CANCELLED = "ORDER_CANCELLED"
+    AI_ANALYSIS_COMPLETE = "AI_ANALYSIS_COMPLETE"

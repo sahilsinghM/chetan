@@ -1,0 +1,85 @@
+# ============================================================
+# ATOS Trading Parameters — v1.0.0
+# Non-secret, versioned in git + DB (param_versions table).
+# Edit via UI (Phase 5) or directly here.
+# Every save via UI creates a new param_versions row.
+# ============================================================
+
+meta:
+  version: "1.0.0"
+  last_modified: "2026-04-05"
+  modified_by: "manual"
+
+# ── Risk ────────────────────────────────────────────────────
+risk:
+  capital_base: 500000              # INR available for trading
+  max_risk_per_trade_pct: 1.0       # Risk 1% of capital per trade
+  max_daily_loss_pct: 3.0           # Halt trading if daily loss > 3%
+  max_open_positions: 5             # Max concurrent open trades
+  max_position_size_pct: 10.0       # Never > 10% of capital in one name
+
+# ── Screener (Phase 2) ──────────────────────────────────────
+screener:
+  universe: "NSE_EQ"                # NSE_EQ | NIFTY500 | CUSTOM
+  min_price: 50.0                   # Skip stocks below ₹50
+  max_price: 5000.0
+  min_avg_volume: 500000            # 20-day avg daily volume
+  min_52w_high_pct: 0.80            # Price > 80% of 52-week high
+  ema_stack_required: true          # 20 EMA > 50 EMA > 200 EMA for LONG
+  rsi_min: 50
+  rsi_max: 75
+  adx_min: 20                       # Trend strength filter
+  min_score_threshold: 60           # Composite score to shortlist
+  max_candidates_per_run: 20
+
+# ── Signals (Phase 2) ───────────────────────────────────────
+signals:
+  swing:
+    consolidation_days: 5
+    breakout_vol_multiplier: 1.5    # Volume > 1.5x 20-day avg on breakout day
+    atr_lookback: 14
+    ema_periods: [20, 50, 200]
+  intraday:
+    enabled: false                  # Phase 4
+    orb_minutes: 15
+
+# ── AI Analysis (Phase 3) ───────────────────────────────────
+ai:
+  model: "claude-sonnet-4-20250514"
+  min_confidence_to_alert: 0.65     # Send for manual review
+  min_confidence_to_auto_execute: 0.80  # Phase 4: auto-execute above this
+  chart_timeframes: ["1D", "1W"]    # Daily + Weekly screenshots
+  require_human_approval: true      # Phase 3: always true
+
+# ── Position Sizing ─────────────────────────────────────────
+position_sizing:
+  method: "fixed_risk_pct"          # fixed_risk_pct | fixed_qty
+  risk_per_trade_pct: 0.01          # 1% of capital_base per trade
+
+# ── Exit Rules ──────────────────────────────────────────────
+exits:
+  t1_partial_exit_pct: 50           # Sell 50% qty at T1
+  trail_sl_after_t1: true
+  trail_method: "ema_cross"         # ema_cross | fixed_atr | swing_low
+  trail_ema_period: 20
+  trail_atr_multiplier: 2.0
+  eod_exit_intraday: true           # Force-close intraday by 15:15
+  eod_exit_time: "15:15"
+
+# ── Charges Model (NSE equities) ────────────────────────────
+charges:
+  brokerage_per_order: 20.0         # ₹20 flat (Dhan)
+  stt_delivery_sell_pct: 0.001      # 0.1% on sell side (delivery)
+  stt_intraday_sell_pct: 0.00025    # 0.025% on sell side (intraday)
+  exchange_txn_pct: 0.0000345       # NSE transaction charge
+  sebi_pct: 0.000001                # SEBI turnover fee
+  gst_pct: 0.18                     # 18% on (brokerage + exchange charges)
+  stamp_duty_buy_pct: 0.00015       # 0.015% on buy side
+
+# ── Market Hours ────────────────────────────────────────────
+market:
+  open_time: "09:15"
+  close_time: "15:30"
+  timezone: "Asia/Kolkata"
+  pre_market_screener_time: "08:00"
+  bhav_copy_download_time: "18:05"
