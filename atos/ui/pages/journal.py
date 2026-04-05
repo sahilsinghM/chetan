@@ -4,8 +4,6 @@ Journal page — trade history with filters, PnL stats, and CSV export.
 
 from __future__ import annotations
 
-import io
-
 import pandas as pd
 import streamlit as st
 

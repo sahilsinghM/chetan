@@ -36,10 +36,9 @@ def daterange(start: date, end: date):
 
 def backfill(start_date: date, end_date: date, delay: float = 2.0) -> None:
     from atos.core.database import get_db
-    from atos.data.nse.bhav_copy import download_and_ingest_bhav
     from atos.core.exceptions import BhavCopyError
+    from atos.data.nse.bhav_copy import download_and_ingest_bhav
 
-    skipped = []
     failed = []
     total_rows = 0
 

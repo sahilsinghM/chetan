@@ -18,7 +18,6 @@ Usage (send an alert from anywhere):
 
 from __future__ import annotations
 
-import asyncio
 import logging
 
 from config.settings import settings
@@ -82,7 +81,7 @@ def run_bot() -> None:
     app.run_polling(allowed_updates=Update.ALL_TYPES)
 
 
-async def _help_handler(update: "Update", context: "ContextTypes.DEFAULT_TYPE") -> None:
+async def _help_handler(update: Update, context: ContextTypes.DEFAULT_TYPE) -> None:
     text = (
         "<b>ATOS Commands</b>\n\n"
         "/status — System health\n"

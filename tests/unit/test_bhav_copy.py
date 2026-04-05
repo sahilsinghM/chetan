@@ -8,7 +8,6 @@ from pathlib import Path
 import pandas as pd
 import pytest
 
-
 FIXTURE_DIR = Path(__file__).parent.parent / "fixtures"
 
 

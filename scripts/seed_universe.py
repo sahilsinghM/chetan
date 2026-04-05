@@ -107,7 +107,7 @@ def load_universe(df: pd.DataFrame) -> int:
 def main() -> None:
     parser = argparse.ArgumentParser(description="Seed NSE instrument universe")
     parser.add_argument("--nse500", action="store_true", help="Also mark NSE 500 stocks")
-    args = parser.parse_args()
+    _args = parser.parse_args()
 
     df = download_equity_list()
     n = load_universe(df)

@@ -22,7 +22,6 @@ from tenacity import (
     wait_exponential,
 )
 
-from atos.core.cache import cache
 from atos.core.exceptions import BrokerError
 from config.settings import settings
 

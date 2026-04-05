@@ -47,11 +47,11 @@ class TVSession:
     """
 
     def __init__(self) -> None:
-        self._playwright: "Playwright | None" = None
-        self._browser: "Browser | None" = None
-        self._context: "BrowserContext | None" = None
+        self._playwright: Playwright | None = None
+        self._browser: Browser | None = None
+        self._context: BrowserContext | None = None
 
-    async def __aenter__(self) -> "TVSession":
+    async def __aenter__(self) -> TVSession:
         if not _PLAYWRIGHT_AVAILABLE:
             raise RuntimeError(
                 "playwright is not installed. Run: pip install playwright && playwright install chromium"
@@ -87,7 +87,7 @@ class TVSession:
         if self._playwright:
             await self._playwright.stop()
 
-    async def new_page(self) -> "playwright.async_api.Page":  # type: ignore[name-defined]
+    async def new_page(self) -> "playwright.async_api.Page":  # type: ignore[name-defined]  # noqa: F821, UP037
         if self._context is None:
             raise RuntimeError("TVSession not entered — use `async with TVSession()`")
         return await self._context.new_page()

@@ -155,6 +155,7 @@ def render() -> None:
             # Send Telegram alert
             try:
                 import asyncio
+
                 from atos.alerts.telegram_bot import send_alert
 
                 sign = "📈" if direction == "LONG" else "📉"

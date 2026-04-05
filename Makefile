@@ -52,7 +52,7 @@ fmt:
 	ruff check --fix atos/ config/ scripts/ tests/
 
 run-ui:
-	streamlit run atos/ui/app.py
+	PYTHONPATH=/home/xinhangyuan/Documents/mycode/Chetan streamlit run atos/ui/app.py
 
 run-scheduler:
-	python -m atos.scheduler.jobs
+	PYTHONPATH=/home/xinhangyuan/Documents/mycode/Chetan python -m atos.scheduler.jobs

@@ -59,6 +59,7 @@ def bhav_copy_job() -> None:
 
         try:
             import asyncio
+
             from atos.alerts.telegram_bot import send_alert
             asyncio.run(send_alert(f"✅ Bhav copy ingested: {rows} rows for {date.today()}"))
         except Exception:
@@ -68,6 +69,7 @@ def bhav_copy_job() -> None:
         logger.error("bhav_copy_job failed: %s", exc, exc_info=True)
         try:
             import asyncio
+
             from atos.alerts.telegram_bot import send_alert
             asyncio.run(send_alert(f"❌ Bhav copy ingestion FAILED: {exc}"))
         except Exception:

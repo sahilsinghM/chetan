@@ -62,7 +62,7 @@ class Trade(Base):
         default=datetime.utcnow, onupdate=datetime.utcnow
     )
 
-    events: Mapped[list["TradeEvent"]] = relationship(
+    events: Mapped[list[TradeEvent]] = relationship(
         "TradeEvent", back_populates="trade", cascade="all, delete-orphan"
     )
 
@@ -84,7 +84,7 @@ class TradeEvent(Base):
     note: Mapped[str | None] = mapped_column(Text)
     raw_payload: Mapped[dict | None] = mapped_column(JSONB)
 
-    trade: Mapped["Trade"] = relationship("Trade", back_populates="events")
+    trade: Mapped[Trade] = relationship("Trade", back_populates="events")
 
     def __repr__(self) -> str:
         return f"<TradeEvent {self.event_type} trade={self.trade_id[:8]}>"

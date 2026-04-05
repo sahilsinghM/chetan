@@ -7,6 +7,8 @@ Run with:
 
 import streamlit as st
 
+from config.settings import settings
+
 st.set_page_config(
     page_title="ATOS Dashboard",
     page_icon="📈",
@@ -14,12 +16,11 @@ st.set_page_config(
     initial_sidebar_state="expanded",
 )
 
-# ── Sidebar ────────────────────────────────────────────────────────────────────
-from config.settings import settings
-
 cfg = settings()
 mode_badge = "📄 PAPER" if cfg.paper_trade_mode else "💰 LIVE"
 mode_color = "green" if cfg.paper_trade_mode else "red"
+
+# ── Sidebar ────────────────────────────────────────────────────────────────────
 
 st.sidebar.title("ATOS")
 st.sidebar.markdown(

@@ -24,9 +24,8 @@ import logging
 import subprocess
 
 import psycopg2
-import yaml
 from psycopg2.extensions import ISOLATION_LEVEL_AUTOCOMMIT
-from sqlalchemy import inspect, text
+from sqlalchemy import text
 
 logging.basicConfig(
     level=logging.INFO,

@@ -32,7 +32,7 @@ from sqlalchemy.orm import Session
 from atos.core.constants import EventType, TradeStatus
 from atos.core.models.event_log import EventLog
 from atos.core.models.trade import Trade, TradeEvent
-from atos.journal.pnl import calculate_charges, realised_pnl
+from atos.journal.pnl import realised_pnl
 from config.settings import load_params, settings
 
 logger = logging.getLogger(__name__)

@@ -32,8 +32,9 @@ os.environ.setdefault("PAPER_TRADE_MODE", "true")
 def db_engine():
     """SQLite in-memory engine with all ATOS tables created."""
     from sqlalchemy import create_engine
-    from atos.core.database import Base
+
     import atos.core.models  # noqa: F401 — register all models
+    from atos.core.database import Base
 
     engine = create_engine("sqlite:///:memory:", echo=False)
     Base.metadata.create_all(engine)
@@ -46,8 +47,8 @@ def db_session(db_engine):
     """Provide a transactional SQLAlchemy session that rolls back after each test."""
     from sqlalchemy.orm import sessionmaker
 
-    Session = sessionmaker(bind=db_engine)
-    session = Session()
+    session_factory = sessionmaker(bind=db_engine)
+    session = session_factory()
     yield session
     session.rollback()
     session.close()
